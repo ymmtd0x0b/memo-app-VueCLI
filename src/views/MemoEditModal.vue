@@ -4,7 +4,7 @@
       <textarea v-model="memo.text"></textarea>
 
       <div class="buttons">
-        <input type="button" value="キャンセル" @click="cansel">
+        <input type="button" value="戻る" @click="back">
         <input type="submit" value="決定">
       </div>
     </form>
@@ -20,8 +20,8 @@ export default {
     }
   },
   methods: {
-    cansel () {
-      this.$router.push('/index')
+    back () {
+      this.$router.push(`/memos/${this.memo.id}`)
     },
     update () {
       this.$store.commit('update', { 
@@ -30,9 +30,8 @@ export default {
           text: this.memo.text
         }
       })
-      this.$router.push(`/memos/${this.memo.id}`)
+      this.$router.push('/memos')
     }
-
   }
 }
 </script>

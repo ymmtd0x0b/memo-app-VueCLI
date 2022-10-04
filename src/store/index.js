@@ -39,13 +39,17 @@ export default createStore({
     }
   },
   mutations: {
+    add (state, payload) {
+      state.memos.push(payload)
+      state.nextId++
+    },
     update (state, payload) {
       const idx = state.memos.findIndex( memo => memo.id === payload.memo.id)
       state.memos[idx].text = payload.memo.text
     },
-    add (state, payload) {
-      state.memos.push(payload)
-      state.nextId++
+    delete (state, { id }) {
+      const idx = state.memos.findIndex( memo => memo.id === id)
+      state.memos.splice(idx, 1)
     }
   },
   actions: {},

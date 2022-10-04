@@ -7,15 +7,12 @@ import MemoNewModal from '../views/MemoNewModal.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/index'
-  },
-  {
-    path: '/index',
+    alias: '/memos',
     name: 'MemoBoardView',
     component: MemoBoardView
   },
   {
-    path: '/new',
+    path: '/memos/new',
     name: 'MemoNewModal',
     component: MemoNewModal
   },
@@ -25,7 +22,7 @@ const routes = [
     component: MemoDetailModal
   },
   {
-    path: '/edit/:id',
+    path: '/memos/:id/edit',
     name: 'MemoEditModal',
     component: MemoEditModal
   },

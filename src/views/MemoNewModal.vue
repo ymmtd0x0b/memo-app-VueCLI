@@ -24,11 +24,11 @@ export default {
   },
   methods: {
     cansel () {
-      this.$router.push('/index')
+      this.$router.push('/memos')
     },
     add () {
       this.$store.commit('add', { id: this.memo.id, text: this.memo.text })
-      this.$router.push('/index')
+      this.$router.push('/memos')
     }
 
   }

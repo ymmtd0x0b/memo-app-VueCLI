@@ -1,17 +1,17 @@
 <template>
-  <div class="overlay">
-    <div class="container">
-      <textarea :value="memo.text" disabled></textarea>
-  
-      <div class="buttons">
-        <input class="left-button" type="button" value="戻る" @click="cansel">
-        <input class="right-button" type="button" value="編集" @click="edit">
-      </div>
+  <memo-modal>
+    <textarea :value="memo.text" disabled></textarea>
+    
+    <div class="buttons">
+      <input class="left-button" type="button" value="戻る" @click="back">
+      <input class="right-button" type="button" value="編集" @click="edit">
     </div>
-  </div>
+  </memo-modal>
 </template>
 
 <script>
+import MemoModal from '../components/MemoModal'
+
 export default {
   name: 'MemoDetailModal',
   data () {
@@ -20,44 +20,20 @@ export default {
     }
   },
   methods: {
-    cansel () {
-      this.$router.push('/index')
+    back () {
+      this.$router.push('/memos')
     },
     edit () {
-      this.$router.push(`/edit/${this.memo.id}`)
+      this.$router.push(`/memos/${this.memo.id}/edit`)
     }
+  },
+  components: {
+    MemoModal
   }
 }
 </script>
 
 <style scoped>
-.overlay {
-  z-index: 1;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  z-index: 2;
-  background-color: #fff;
-  width: 400px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 25px;
-  border: solid 1px #000;
-  border-radius: 15px;
-}
-
 input,
 textarea {
   display: block;
