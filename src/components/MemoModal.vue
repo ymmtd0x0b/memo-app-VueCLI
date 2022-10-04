@@ -1,14 +1,28 @@
 <template>
   <div class="overlay">
-    <div class="container">
-      <slot></slot>
+    <div class="modal">
+      <div class="header">
+        <input
+          class="close"
+          type="button"
+          value="☓"
+          @click="close" />
+      </div>
+      <div class="main">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MemoModal'
+  name: 'MemoModal',
+  methods: {
+    close () {
+      this.$router.push('/memos')
+    }
+  }
 }
 </script>
 
@@ -28,15 +42,30 @@ export default {
   justify-content: center;
 }
 
-.container {
+.modal {
   z-index: 2;
   background-color: #fff;
   width: 400px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 25px;
+  margin: 0 auto;
+  padding: 5px 20px 20px 20px;
   border: solid 1px #000;
   border-radius: 15px;
+}
+
+.header {
+  position: relative;
+  height: 25px;
+}
+
+.header input.close {
+  position: absolute;
+  top: 0px;
+  right: -10px;
+  padding: 0px;
+  border: none;
+  line-height: 1.5em;
+  font-size: 1em;
+  background-color: #fff;
+  cursor: pointer;
 }
 </style>

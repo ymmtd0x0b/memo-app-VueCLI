@@ -1,17 +1,19 @@
 <template>
   <memo-modal>
-    <textarea :value="memo.text" disabled></textarea>
-    
-    <div class="buttons">
-      <input class="left-button" type="button" value="戻る" @click="back">
-      <input class="right-button" type="button" value="編集" @click="edit">
-    </div>
+    <form @submit.prevent="update">
+      <textarea v-model="memo.text"></textarea>
+
+      <div class="buttons">
+        <input type="submit" value="更新">
+        <input type="button" value="削除" @click="deleteMemo">
+      </div>
+    </form>
   </memo-modal>
 </template>
 
 <script>
 import MemoModal from '../components/MemoModal'
-
+  
 export default {
   name: 'MemoDetailModal',
   data () {
@@ -21,10 +23,20 @@ export default {
   },
   methods: {
     back () {
+      this.$router.push(`/memos`)
+    },
+    update () {
+      this.$store.commit('update', { 
+        memo: {
+          id: this.memo.id,
+          text: this.memo.text
+        }
+      })
       this.$router.push('/memos')
     },
-    edit () {
-      this.$router.push(`/memos/${this.memo.id}/edit`)
+    deleteMemo () {
+      this.$store.commit('delete', { id: this.memo.id })
+      this.$router.push('/memos')
     }
   },
   components: {
@@ -55,7 +67,8 @@ textarea {
   display: flex;
 }
 
-.right-button {
-  margin-left: auto;
+input[type=submit] {
+  width: 100%;
+  margin-right: 10px;
 }
 </style>

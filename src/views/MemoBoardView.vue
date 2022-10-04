@@ -1,13 +1,12 @@
 <template>
     <h2>一覧</h2>
-    <div class="container">
+    <div class="board">
       <ul>
         <li v-for="memo of memos" :key="memo.id">
-          <p @click="onClick(memo)">{{ getFirstLineOfMemo(memo.id) }}</p>
-          <button @click="deleteMemo(memo.id)">削除</button>
+          <router-link :to="`/memos/${memo.id}`">{{ getFirstLineOfMemo(memo.id) }}</router-link>
         </li>
       </ul>
-      <div class="new-item" @click="goNewMemoForm">+</div>
+      <router-link class="newIcon" to="/memos/new">+</router-link>
     </div>
 
     <router-view />
@@ -23,54 +22,35 @@ export default {
       memos: this.$store.state.memos
     }
   },
-  computed: mapGetters(['getFirstLineOfMemo']),
-  methods: {
-    onClick (memo) {
-      this.$router.push(`/memos/${memo.id}`)
-    },
-    goNewMemoForm () {
-      this.$router.push(`/memos/new`)
-    },
-    deleteMemo (id) {
-      this.$store.commit('delete', { id: id })
-    }
-  }
+  computed: mapGetters(['getFirstLineOfMemo'])
 }
 </script>
 
 <style>
 h2 {
-  font-size: 1em;
+  font-size: .8em;
+  color: #444;
+  line-height: 1em;
+  margin: 0px 0px 10px 0px;
+}
+
+.board {
+  background-color: #fff;
+  padding: 5px 10px;
+  box-shadow: 0px 0px 2px 0px;
 }
 
 ul {
-  padding-left: 1em;
+  padding: 0px;
 }
 
 ul li {
-  display: flex;
+  list-style: none;
   height: 2em;
 }
 
-button,
-p {
-  display: block;
-  margin: 0;
-}
-
-p {
-  height: 2em;
-  line-height: 2em;
-  width: 10.1em;
-  margin-right: 20px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.new-item {
-  height: 1.5em;
-  width: 1.5em;
-  text-align: center;
-  cursor: pointer;
+.newIcon {
+  text-decoration: none;
+  font-size: 1.3em;
 }
 </style>

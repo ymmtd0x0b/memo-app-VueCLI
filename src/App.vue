@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <h1>メモアプリ</h1>
-    <router-view />
-  </div>
+  <h1>メモアプリ</h1>
+  <router-view />
 </template>
 
 <script>
@@ -17,7 +15,7 @@ body {
 }
 
 #app {
-  background-color: #eee;
+  background-color: #ddd;
   padding: 20px;
   margin: 0;
   height: 100vh;
@@ -25,5 +23,6 @@ body {
 
 h1 {
   margin-top: 0px;
+  font-size: 1.5em;
 }
 </style>
