@@ -8,11 +8,12 @@ export default createStore({
   },
   getters: {
     getMemoAll (state) {
-      return JSON.parse(JSON.stringify(state.memos))
+      return state.memos.map(memo => Object.create(memo))
     },
     getMemoById (state) {
       return id => {
-        return JSON.parse(JSON.stringify(state.memos.find(memo => memo.id === Number(id))))
+        const memo = state.memos.find(memo => memo.id === Number(id))
+        return Object.create(memo)
       }
     },
     getFirstLineOfMemo (state, getters) {
@@ -28,11 +29,11 @@ export default createStore({
       state.nextId++
     },
     update (state, { id, text }) {
-      const idx = state.memos.findIndex( memo => memo.id === id)
+      const idx = state.memos.findIndex(memo => memo.id === id)
       state.memos[idx].text = text
     },
     destroy (state, { id }) {
-      const idx = state.memos.findIndex( memo => memo.id === id)
+      const idx = state.memos.findIndex(memo => memo.id === id)
       state.memos.splice(idx, 1)
     }
   },
