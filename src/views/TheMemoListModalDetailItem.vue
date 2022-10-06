@@ -1,46 +1,50 @@
 <template>
-  <memo-modal>
+  <MemoListModal>
     <form @submit.prevent="update">
       <textarea v-model="memo.text"></textarea>
 
       <div class="buttons">
-        <input type="submit" value="更新">
-        <input type="button" value="削除" @click="deleteMemo">
+        <input
+          class="broad-button"
+          type="submit"
+          value="更新"
+        />
+        <input
+          type="button"
+          value="削除"
+          @click="destroy"
+        />
       </div>
     </form>
-  </memo-modal>
+  </MemoListModal>
 </template>
 
 <script>
-import MemoModal from '../components/MemoModal'
+import MemoListModal from '../components/MemoListModal.vue'
   
 export default {
-  name: 'MemoDetailModal',
+  components: {
+    MemoListModal
+  },
   data () {
     return {
       memo: this.$store.getters.getMemoById(this.$route.params.id)
     }
   },
   methods: {
-    back () {
-      this.$router.push(`/memos`)
-    },
     update () {
-      this.$store.commit('update', { 
-        memo: {
-          id: this.memo.id,
-          text: this.memo.text
-        }
+      this.$store.commit('update', {
+        id: this.memo.id,
+        text: this.memo.text
       })
       this.$router.push('/memos')
     },
-    deleteMemo () {
-      this.$store.commit('delete', { id: this.memo.id })
+    destroy () {
+      this.$store.commit('destroy', {
+        id: this.memo.id
+      })
       this.$router.push('/memos')
     }
-  },
-  components: {
-    MemoModal
   }
 }
 </script>
@@ -53,22 +57,20 @@ textarea {
 
 textarea {
   margin-bottom: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 1.5em;
-  font-family: inherit;
-}
-
-textarea {
   height: 15em;
+  width: 100%;
+
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1.5em;
 }
 
 .buttons {
   display: flex;
 }
 
-input[type=submit] {
-  width: 100%;
+.broad-button {
   margin-right: 10px;
+  width: 100%;
 }
 </style>

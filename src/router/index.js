@@ -1,24 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MemoBoardView from '../views/MemoBoardView.vue'
-import MemoDetailModal from '../views/MemoDetailModal.vue'
-import MemoNewModal from '../views/MemoNewModal.vue'
+import TheMemoListShowItems from '../views/TheMemoListShowItems.vue'
+import TheMemoListModalDetailItem from '../views/TheMemoListModalDetailItem.vue'
+import TheMemoListModalNewItem from '../views/TheMemoListModalNewItem.vue'
 
 const routes = [
   {
     path: '/',
     alias: '/memos',
-    name: 'MemoBoardView',
-    component: MemoBoardView
+    component: TheMemoListShowItems
   },
   {
     path: '/memos/new',
-    name: 'MemoNewModal',
-    component: MemoNewModal
+    component: TheMemoListModalNewItem
   },
   {
     path: '/memos/:id',
-    name: 'MemoDetailModal',
-    component: MemoDetailModal
+    name: 'memos',
+    component: TheMemoListModalDetailItem
   },
   {
     path: '/:paths(.*)*',

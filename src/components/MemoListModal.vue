@@ -9,7 +9,7 @@
           @click="close" />
       </div>
       <div class="main">
-        <slot></slot>
+        <slot />
       </div>
     </div>
   </div>
@@ -17,7 +17,6 @@
 
 <script>
 export default {
-  name: 'MemoModal',
   methods: {
     close () {
       this.$router.push('/memos')
@@ -33,8 +32,10 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, .5);
 
   display: flex;
@@ -43,11 +44,12 @@ export default {
 }
 
 .modal {
-  z-index: 2;
-  background-color: #fff;
-  width: 400px;
   margin: 0 auto;
   padding: 5px 20px 20px 20px;
+
+  width: 400px;
+
+  background-color: #fff;
   border: solid 1px #000;
   border-radius: 15px;
 }
@@ -61,11 +63,13 @@ export default {
   position: absolute;
   top: 0px;
   right: -10px;
+
   padding: 0px;
-  border: none;
-  line-height: 1.5em;
-  font-size: 1em;
+
   background-color: #fff;
+  border: none;
   cursor: pointer;
+  font-size: 1em;
+  line-height: 1.5em;
 }
 </style>

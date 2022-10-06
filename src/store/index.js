@@ -3,33 +3,16 @@ import createPersistedState from 'vuex-persistedstate'
 
 export default createStore({
   state:{
-    memos: [
-      {
-        id: 1,
-        text: 'メモ１'
-      },
-      {
-        id: 2,
-        text: 'メモ２'
-      },
-      {
-        id: 3,
-        text: 'メモ３'
-      },
-      {
-        id: 4,
-        text: `メモ４
-          あああ
-          いいい`.split('\n').map(str => str.trim()).join('\n')
-      }
-    ],
-
-    nextId: 5
+    memos: [],
+    nextId: 1
   },
   getters: {
+    getMemoAll (state) {
+      return JSON.parse(JSON.stringify(state.memos))
+    },
     getMemoById (state) {
       return id => {
-        return state.memos.find(memo => memo.id === Number(id))
+        return JSON.parse(JSON.stringify(state.memos.find(memo => memo.id === Number(id))))
       }
     },
     getFirstLineOfMemo (state, getters) {
@@ -39,20 +22,20 @@ export default createStore({
     }
   },
   mutations: {
-    add (state, payload) {
-      state.memos.push(payload)
+    add (state, newMemo) {
+      newMemo.id = state.nextId
+      state.memos.push(newMemo)
       state.nextId++
     },
-    update (state, payload) {
-      const idx = state.memos.findIndex( memo => memo.id === payload.memo.id)
-      state.memos[idx].text = payload.memo.text
+    update (state, { id, text }) {
+      const idx = state.memos.findIndex( memo => memo.id === id)
+      state.memos[idx].text = text
     },
-    delete (state, { id }) {
+    destroy (state, { id }) {
       const idx = state.memos.findIndex( memo => memo.id === id)
       state.memos.splice(idx, 1)
     }
   },
-  actions: {},
   plugins: [
     createPersistedState({
       key: 'memo-app',

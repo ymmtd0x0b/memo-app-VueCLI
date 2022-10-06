@@ -4,9 +4,6 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
 </script>
 
 <style>
@@ -15,10 +12,11 @@ body {
 }
 
 #app {
-  background-color: #ddd;
-  padding: 20px;
   margin: 0;
+  padding: 20px;
   height: 100vh;
+
+  background-color: #ddd;
 }
 
 h1 {
