@@ -15,11 +15,6 @@ export default createStore({
         const memo = state.memos.find(memo => memo.id === Number(id))
         return Object.create(memo)
       }
-    },
-    getFirstLineOfMemo (state, getters) {
-      return id => {
-        return getters.getMemoById(id).text.split('\n')[0]
-      }
     }
   },
   mutations: {

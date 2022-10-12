@@ -7,7 +7,7 @@
           :key="memo.id"
         >
           <router-link :to="{ name: 'memos', params: { id: memo.id } }">
-            {{ firstLine(memo.id) }}
+            {{ getFirstLine(memo.text) }}
           </router-link>
         </li>
       </ul>
@@ -26,10 +26,16 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  computed: mapGetters({
-    memos: 'getMemoAll',
-    firstLine: 'getFirstLineOfMemo'
-  })
+  computed: {
+    ...mapGetters({
+    memos: 'getMemoAll'
+    })
+  },
+  methods: {
+    getFirstLine(text) {
+      return text.split('\n')[0]
+    }
+  }
 }
 </script>
 
