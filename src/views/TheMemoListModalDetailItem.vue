@@ -33,17 +33,10 @@ export default {
   },
   methods: {
     update () {
-      this.$store.commit('update', {
-        id: this.memo.id,
-        text: this.memo.text
-      })
-      this.$router.push('/memos')
+      this.$emit('update', this.memo)
     },
     destroy () {
-      this.$store.commit('destroy', {
-        id: this.memo.id
-      })
-      this.$router.push('/memos')
+      this.$emit('destroy', this.memo.id)
     }
   }
 }

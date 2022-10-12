@@ -7,16 +7,19 @@ const routes = [
   {
     path: '/',
     alias: '/memos',
-    component: TheMemoListShowItems
-  },
-  {
-    path: '/memos/new',
-    component: TheMemoListModalNewItem
-  },
-  {
-    path: '/memos/:id',
-    name: 'memos',
-    component: TheMemoListModalDetailItem
+    component: TheMemoListShowItems,
+
+    children: [
+      {
+        path: 'new',
+        component: TheMemoListModalNewItem
+      },
+      {
+        path: ':id',
+        name: 'memos',
+        component: TheMemoListModalDetailItem
+      }
+    ]
   },
   {
     path: '/:paths(.*)*',

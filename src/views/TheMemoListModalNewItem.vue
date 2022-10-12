@@ -36,8 +36,7 @@ export default {
   },
   methods: {
     add () {
-      this.$store.commit('add', this.memo)
-      this.$router.push('/memos')
+      this.$emit('add', this.memo)
     },
     back () {
       this.$router.push('/memos')

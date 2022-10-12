@@ -19,21 +19,29 @@
       </router-link>
     </div>
 
-    <router-view />
+    <router-view
+      @add="add"
+      @update="update"
+      @destroy="destroy"
+    />
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  computed: {
-    ...mapGetters({
-    memos: 'getMemoAll'
-    })
-  },
+  props: ['memos'],
+  emits: ['add', 'update', 'destroy'],
   methods: {
     getFirstLine(text) {
       return text.split('\n')[0]
+    },
+    add (memo) {
+      this.$emit('add', memo)
+    },
+    update (memo) {
+      this.$emit('update', memo)
+    },
+    destroy (memoId) {
+      this.$emit('destroy', memoId)
     }
   }
 }
